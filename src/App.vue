@@ -1,15 +1,45 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import WelcomeCard from "./components/WelcomeCard.vue";
-import Todos from "./components/Todos.vue";
+<script>
+import TodoList from "./components/TodoList.vue";
+import TodoInput from "./components/TodoInput.vue";
+export default {
+  components: {
+    TodoList,
+    TodoInput,
+  },
+  data() {
+    return {
+      todos: [{ finished: false, name: "Add a new todo" }],
+    };
+  },
+  methods: {
+    addTodo(todo) {
+      if (this.todo !== "") {
+        this.todos.push({ finished: false, name: todo });
+        this.todo = "";
+      } else {
+        alert("Todo must have a value");
+      }
+    },
+    removeTodo(index) {
+      this.todos.splice(index, 1);
+    },
+    toggleFinishedTodo(index) {
+      this.todos[index].finished = !this.todos[index].finished;
+    },
+  },
+};
 </script>
 
 <template>
   <header>
-    <WelcomeCard />
+    <h1 class="font-mono text-center dark:text-stone-200 text-2xl">Vue 3 Todo App</h1>
   </header>
   <main class="grid gap-y-3 place-content-center">
-    <Todos />
+    <TodoInput @add-todo="addTodo" />
+    <TodoList
+      :todos="todos"
+      @remove-todo="removeTodo"
+      @finished-todo="toggleFinishedTodo"
+    />
   </main>
 </template>
