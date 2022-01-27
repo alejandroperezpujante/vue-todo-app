@@ -6,7 +6,7 @@ export default {
     };
   },
   methods: {
-    sendTodo() {
+    emitTodo() {
       this.$emit("add-todo", this.todo);
       this.todo = "";
     },
@@ -15,22 +15,25 @@ export default {
 </script>
 
 <template>
-  <form @submit.prevent="refresh" class="flex flex-col gap-2">
-    <label for="todoInput" class="text-stone-200 text-xl">Write a new todo:</label>
+  <section>
+    <label for="todoInput" class="text-xl text-stone-600 dark:text-stone-200"
+      >Write a new todo:</label
+    >
     <section class="flex gap-4">
       <input
         type="text"
         name="todoInput"
         id="todoInput"
-        class="rounded p-1"
+        class="p-1 rounded"
+        @keyup.enter="emitTodo()"
         v-model="todo"
       />
       <input
         type="submit"
-        class="p-1 rounded bg-neutral-300 cursor-pointer"
+        class="p-1 rounded cursor-pointer bg-neutral-300"
         value="Add"
-        @click="sendTodo()"
+        @click="emitTodo()"
       />
     </section>
-  </form>
+  </section>
 </template>

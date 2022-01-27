@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <ul v-if="todos.length !== 0" class="flex flex-col gap-2 p-2 rounded bg-slate-200">
+  <ul v-if="todos.length !== 0" class="flex flex-col gap-2 p-4 rounded bg-slate-200">
     <li
       v-for="todo in todos"
       :key="todo"
@@ -37,10 +37,7 @@ export default {
         >
           Done
         </button>
-        <button
-          class="text-sm [text-shadow:_2px_2px_2px_#000] text-red-600"
-          @click="removeTodo(todos.indexOf(todo))"
-        >
+        <button class="text-sm text-red-600" @click="removeTodo(todos.indexOf(todo))">
           x
         </button>
       </nav>

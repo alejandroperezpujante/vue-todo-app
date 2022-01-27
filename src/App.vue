@@ -13,10 +13,12 @@ export default {
   },
   methods: {
     addTodo(todo) {
-      if (this.todo !== "") {
+      if (todo !== "") {
+        console.log(todo);
         this.todos.push({ finished: false, name: todo });
         this.todo = "";
       } else {
+        console.log(todo);
         alert("Todo must have a value");
       }
     },
